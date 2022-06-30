@@ -1,0 +1,26 @@
+.primary{
+    border: 2px solid #C1BDDB;
+    padding: 1rem 1.8rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #C1BDDB;
+    background-color: #fdfdfd;
+    transition: .3s;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    &:hover{
+        background-color: #C1BDDB;
+        color: white;
+    }
+}
+.secondary{
+    @extend .primary;
+    background-color: #C1BDDB;
+    color: white;
+    &:hover{
+        background-color: #b0aadb;
+    }
+}

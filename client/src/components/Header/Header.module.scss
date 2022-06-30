@@ -1,0 +1,52 @@
+.wrapper{
+    width: 100%;
+    display: flex;
+    position: sticky;
+    top: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding: 1rem;
+    .left{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
+        .logo{
+            height: 60px;
+            width: 60px;
+        }
+        .logoText{
+            font-size: 1.4rem;
+            font-weight: bold;
+            background-image: linear-gradient(90deg, #68c0fa 40%, #fa68da 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+    .right{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        .welcomeText{
+            font-weight: bold;
+            font-size: 1.2rem;
+            .welcomeTextImportant{
+                font-size: 1.3rem;
+                color: #C1BDDB;
+            }
+        }
+        .avatar{
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            margin-left: 2rem;
+        }
+    }
+}

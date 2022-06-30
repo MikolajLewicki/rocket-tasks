@@ -1,0 +1,111 @@
+.wrapper{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 4;
+    .backWall{
+        position: absolute;
+        top: 0;
+        right:  0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        background-color: rgba(131, 131, 131, 0.15);
+    }
+    .contentContainer{
+        position: absolute;
+        width: 400px;
+        top:0;
+        height: 100vh;
+        background-color: #fff;
+        -webkit-box-shadow: -3px 0px 12px 0px rgba(66, 68, 90, 0.596);
+        -moz-box-shadow: -3px 0px 12px 0px rgba(66, 68, 90, 0.596);
+        box-shadow: -3px 0px 12px 0px rgba(66, 68, 90, 0.596);
+        z-index: 5;
+        padding: 3%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        .userInfo{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .avatar{
+                height: 150px;
+                width: 150px;
+                border-radius: 50%;
+            }
+            .welcomeText{
+                font-weight: bold;
+                font-size: 1.4rem;
+                margin-top: 1rem;
+                .welcomeTextImportant{
+                    font-size: 1.5rem;
+                    color: #C1BDDB;
+                }
+            }
+        }
+        .content{
+            flex-grow: 1;
+            width: 100%;
+            margin-top: 1rem;
+            .inputContainer{
+                text-align: center;
+                position: relative;
+                input[type="file"] {
+                    visibility: hidden;
+                    width: 100%;
+                    &::after{
+                        visibility: visible;
+                        width: 100%;
+                        position: absolute; 
+                        top: 0;
+                        left: 0;  
+                        display: block;
+                        border: 2px solid #C1BDDB;
+                        padding: 1rem 0rem;
+                        font-size: 1.2rem;
+                        text-decoration: none;
+                        transition: .3s;
+                        position: relative;
+                        overflow: hidden;
+                        text-decoration: none;
+                        cursor: pointer;
+                        text-align: center;  
+                        content: "Zmień avatar";  
+                        background-color: #C1BDDB;
+                        color: white;
+                    }
+                }
+                .inputActive{
+                    &::after{
+                        visibility: visible;
+                        width: 100%;
+                        position: absolute; 
+                        top: 0;
+                        left: 0;  
+                        display: block;
+                        border: 2px solid #C1BDDB;
+                        padding: 1rem 0rem;
+                        font-size: 1.2rem;
+                        text-decoration: none;
+                        transition: .3s;
+                        position: relative;
+                        overflow: hidden;
+                        text-decoration: none;
+                        cursor: pointer;
+                        text-align: center;  
+                        content: "Zmień avatar";  
+                        background-color: #b0aadb !important;  
+                        color: white;
+                    }
+                }
+            }
+            
+        }
+    }
+}

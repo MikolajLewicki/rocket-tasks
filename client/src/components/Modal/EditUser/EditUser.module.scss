@@ -1,0 +1,44 @@
+.wrapper{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    .title{
+        width: 100%;
+        text-align: left;
+        color: #C1BDDB;
+        font-weight: bold;
+        font-size: 1.4rem;
+    }
+    .content{
+        flex-grow: 1;
+        width: 100%;
+        flex-direction: column;
+        display: flex;
+        overflow-y: auto;
+    }
+    .confirmationStep{
+        @extend .content;
+        justify-content: center;
+        align-items: center;
+        // min-height: 80%;
+        .confirmationStepTitle{
+            @extend .title;
+            text-align: center;
+        }
+        .confirmationStepButtons{
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            align-items: center;
+            justify-content: space-around;
+        }
+    }
+    .buttons{
+        width: 100%;
+    }
+
+}

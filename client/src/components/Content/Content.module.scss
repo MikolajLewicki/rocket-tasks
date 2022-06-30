@@ -1,0 +1,76 @@
+.wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5vh;
+    .headerContainer{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        .title{
+            color: #C1BDDB;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+        .nav{
+            color: #C1BDDB;
+            font-weight: bold;
+            font-size: 1.4rem;
+            width: 75px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}
+.loadingWrapper{
+    width: 100%;
+    margin-top: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .loadingContainer{
+        ///i took loading animation from https://freefrontend.com/css-loaders/, author: Sudeep Gumaste
+        height: 15px;
+        width: 105px;
+        display: flex;
+        position: relative;
+        .circle{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #C1BDDB;
+            animation: move 500ms linear 0ms infinite;
+            margin-right: 30px;
+            
+            &:first-child{
+            position: absolute;
+            top:0;
+            left:0;
+            animation: grow 500ms linear 0ms infinite;
+            }
+            
+            &:last-child{
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-right: 0;
+            animation: grow 500ms linear 0s infinite reverse;
+            }
+        }
+        }
+
+        @keyframes grow {
+        from {transform: scale(0,0); opacity: 0;}
+        to {transform: scale(1,1); opacity: 1;}
+        }
+
+        @keyframes move {
+        from {transform: translateX(0px)}
+        to {transform: translateX(45px)}
+        }
+}
