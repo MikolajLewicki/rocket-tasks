@@ -13,8 +13,8 @@ const Nav = ({setIsModalOpen}) => {
         <div className={styles.wrapper}>
             <div className={styles.nav}>
             <div className={styles.left}>
-                    <NavLink to="/myTasks">{({ isActive }) => (<Button style={{marginLeft: "2rem"}} secondary={isActive} text="Moje"/>)}</NavLink>
-                    <NavLink to="/allTasks">{({ isActive }) => (<Button style={{marginLeft: "2rem"}} secondary={isActive} text="Wszystkie"/>)}</NavLink>
+                    <NavLink to="/tasks">{({ isActive }) => (<Button style={{marginLeft: "2rem"}} secondary={isActive} text="Zadania"/>)}</NavLink>
+                    <NavLink to="/statistics">{({ isActive }) => (<Button style={{marginLeft: "2rem"}} secondary={isActive} text="Statystyki"/>)}</NavLink>
                     {user.isAdmin && <NavLink to="/users">{({ isActive }) => (<Button style={{marginLeft: "2rem"}} secondary={isActive} text="Użytkownicy"/>)}</NavLink>}
                 </div>
                 <div className={styles.right}>

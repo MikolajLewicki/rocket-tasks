@@ -35,9 +35,9 @@ const App = () => {
             {showContent ? <>{isLogged && <Header setIsMenuOpen={setIsMenuOpen}/>}
             {isLogged && <Nav setIsModalOpen={setIsModalOpen} />}
             {isLogged ? <Routes>
-                <Route path="*" element={<Navigate to="/myTasks" replace />} />
-                <Route path="/myTasks" element={<Content />} />
-                <Route path="/allTasks" element={<Content />} />
+                <Route path="*" element={<Navigate to="/tasks" replace />} />
+                <Route path="/tasks" element={<Content />} />
+                <Route path="/statistics" element={<Content />} />
                 {user.isAdmin && <Route path="/users/*" element={<Content setIsModalOpen={setIsModalOpen}/>} />}
             </Routes> : <Routes>
                 <Route path="*" element={<Navigate to="/logIn" replace />} />
