@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 
 export const addTask = async (req, res) => {
     try{
-        console.log('it works')
+        console.log(req.body)
     }catch(err){
         console.log(err)
     }

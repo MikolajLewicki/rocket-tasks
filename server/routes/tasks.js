@@ -1,5 +1,5 @@
 import express from 'express'
-import { addTasks } from '../controlers/tasks.js'
+import { addTask } from '../controlers/tasks.js'
 import auth from '../middleware/auth.js'
 
 
