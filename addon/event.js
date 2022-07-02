@@ -20,6 +20,7 @@ const handleChangeTab = async () => {
     currentTabId = tab[0].id
     currentDomain = currentLink.slice(8, Options.domain.length+8)
     currentDomain === Options.domain ? chrome.contextMenus.create(contextMenuItem) : chrome.contextMenus.removeAll()
+    chrome.notifications.clear('actionCompleated')
 }
 chrome.tabs.onActivated.addListener(handleChangeTab)
 
@@ -35,7 +36,15 @@ const handleClick = () => {
             fetch(url, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json; charset=utf-8" }, body: JSON.stringify({title, link})})
         }
       });
-   
+    
+    const notifOptions = {
+        type: "basic",
+        iconUrl: './icons/icons8-rocket-64.png',
+        title: 'Dodano Sprzedaż do listy zadań 🎉',
+        message: 'Teraz możesz sprawdzić jej status w Rocekt Tasks'
+    }
+    chrome.notifications.create('actionCompleated', notifOptions)
+
     chrome.contextMenus.removeAll()
 }
 
