@@ -21,3 +21,6 @@ export const resetPassword = (data) => API.post('/users/resetPassword', data)
 export const changeMail = (data) => API.post('/users/changeMail', data)
 export const changeName = (data) => API.post('/users/changeName', data)
 export const getUser = (data) => API.post('/users/getUser', data)
+
+///tasks
+export const getTasks = () => API.get('/tasks/getTasks')

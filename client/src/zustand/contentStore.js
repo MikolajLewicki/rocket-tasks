@@ -4,11 +4,25 @@ import { devtools } from 'zustand/middleware'
 
 const store = (set) => ({
     content: [],
-    getContent:  async (type) => {
+    currentContent: "",
+    getContent:  async (type, currentContent) => {
         try{
             if(type.includes("/users")){
+                console.log((state) => state.currentContent)
+                if(currentContent === "/tasks" ){
+                    set((state) => ({content: []}))
+                }  
                 const result = await api.getUsers();
                 set((state) => ({content: result.data.result}))
+                set((state) => ({currentContent: "/users"}))
+            }
+            if(type.includes("/tasks")){
+                if(currentContent === "/users" ){
+                    set((state) => ({content: []}))
+                }  
+                const result = await api.getTasks();
+                set((state) => ({content: result.data.result}))
+                set((state) => ({currentContent: "/tasks"}))
             }
         }catch(err){
             console.log(err)

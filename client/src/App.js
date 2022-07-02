@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import styles from './App.module.scss'
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
-import Content from "./components/Content/Content";
+import List from "./components/List/List";
 import Modal from "./components/Modal/Modal";
 import Menu from "./components/Menu/Menu";
 import usersStore from "./zustand/usersStore";
@@ -36,12 +36,13 @@ const App = () => {
             {isLogged && <Nav setIsModalOpen={setIsModalOpen} />}
             {isLogged ? <Routes>
                 <Route path="*" element={<Navigate to="/tasks" replace />} />
-                <Route path="/tasks" element={<Content />} />
-                <Route path="/statistics" element={<Content />} />
-                {user.isAdmin && <Route path="/users/*" element={<Content setIsModalOpen={setIsModalOpen}/>} />}
+                <Route path="/tasks/*" element={<List setIsModalOpen={setIsModalOpen} />} />
+                <Route path="/statistics" element={<List />} />
+                {user.isAdmin && <Route path="/users/*" element={<List setIsModalOpen={setIsModalOpen}/>} />}
             </Routes> : <Routes>
                 <Route path="*" element={<Navigate to="/logIn" replace />} />
-                <Route path="/logIn" element={<Content />} />
+                <Route path="/logIn" element={<List />} />
+                <Route path="/logIn" element={<List />} />
                 </Routes>}
             <Modal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}/>
             <Menu setIsMenuOpen={setIsMenuOpen} isLogged={isLogged} isMenuOpen={isMenuOpen}/> </> : 
