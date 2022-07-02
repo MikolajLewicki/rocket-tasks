@@ -17,7 +17,6 @@ const Modal = ({setIsModalOpen, isModalOpen}) => {
     const handleCloseModal = () => {
         setIsModalOpen(false)
         if(location.slice(1).indexOf('/') !== -1){
-            console.log(location.slice(0, (location.slice(1).indexOf('/') + 1)))
             navigate(location.slice(0, (location.slice(1).indexOf('/') + 1)))        
         }
     }

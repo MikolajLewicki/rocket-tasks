@@ -16,8 +16,17 @@
         flex-grow: 1;
         width: 100%;
         flex-direction: column;
+        margin-top: 3rem;
         display: flex;
         overflow-y: auto;
+        p{
+            margin-top: 1rem;
+            font-size: 1.4rem;
+            .spanTitle{
+                font-weight: bold;
+                color: #C1BDDB;
+            }
+        }
     }
     .confirmationStep{
         @extend .content;

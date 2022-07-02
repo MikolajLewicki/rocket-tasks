@@ -92,6 +92,15 @@ const store = (set) => ({
             console.log(err)
         }
     },
+    getUser: async (id, setAuthor) => {
+        try{
+            const data = [id]
+            const result = await api.getUser(data)
+            setAuthor(result.data.result.name)
+        }catch(err){
+            console.log(err)
+        }
+    },
     updateUser: async (editUser, userToEditId, id) => {
         try{
             let data = [editUser, userToEditId]

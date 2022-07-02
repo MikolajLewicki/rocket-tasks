@@ -8,7 +8,6 @@ const store = (set) => ({
     getContent:  async (type, currentContent) => {
         try{
             if(type.includes("/users")){
-                console.log((state) => state.currentContent)
                 if(currentContent === "/tasks" ){
                     set((state) => ({content: []}))
                 }  
