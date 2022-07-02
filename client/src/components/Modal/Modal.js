@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router";
 import NewUser from "./NewUser/NewUser";
 import LogIn from "./LogIn/LogIn";
 import EditUser from "./EditUser/EditUser";
+import TaskDetails from "./TaskDetails/TaskDetails";
 
 const Modal = ({setIsModalOpen, isModalOpen}) => {
     const location = useLocation().pathname
@@ -19,8 +20,8 @@ const Modal = ({setIsModalOpen, isModalOpen}) => {
             console.log(location.slice(0, (location.slice(1).indexOf('/') + 1)))
             navigate(location.slice(0, (location.slice(1).indexOf('/') + 1)))        
         }
-        
     }
+
     return(
         <div className={styles.wrapper} style={{width: location === "/logIn" ? "100%" : wrapperWidth}}>
             {location !== "/logIn" && <div className={styles.backWall} onClick={handleCloseModal}></div>}
@@ -33,6 +34,7 @@ const Modal = ({setIsModalOpen, isModalOpen}) => {
                 {location === "/users" && <NewUser setIsModalOpen={setIsModalOpen}/>}
                 {location.includes("/users/") && <EditUser setIsModalOpen={setIsModalOpen}/>}
                 {location === "/logIn" && <LogIn setIsModalOpen={setIsModalOpen}/>}
+                {location.includes("/tasks/") && <TaskDetails setIsModalOpen={setIsModalOpen}/>}
             </motion.div>}
             </AnimatePresence>
         </div>

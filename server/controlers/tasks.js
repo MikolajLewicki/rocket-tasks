@@ -40,8 +40,22 @@ export const getTasks = async (req, res) => {
 }
 export const changeStatus = async (req, res) => {
     try{
+        if(req.body[0] === "work"){
+            await Task.findByIdAndUpdate(req.body[1], {startOfWork: new Date()})
+        }
+        if(req.body[0] === "end"){
+            await Task.findByIdAndUpdate(req.body[1], {endOfWork: new Date()})
+        }
         await Task.findByIdAndUpdate(req.body[1], {status: req.body[0]})
         res.status(200).json({message: "status changed succesfully"})
+    }catch(err){
+        console.log(err)
+    }
+}
+export const deleteTask = async (req, res) => {
+    try{
+        await Task.findByIdAndDelete(req.body[0])
+        res.status(200).json({message: "Task deleted succesfully"})
     }catch(err){
         console.log(err)
     }

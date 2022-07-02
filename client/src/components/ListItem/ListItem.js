@@ -13,7 +13,6 @@ const ListItem = ({name, id, assignedFor, setIsModalOpen, tasks, status}) => {
     const [secondButton, setSecondButton] = useState()
     useEffect(() => {
         if(assignedFor === user._id.toString()){
-            console.log(status)
             switch (status){
                 case 'new':
                     setSecondButton(<button className={styles.button3} onClick={() => {changeStatus('work', id)}}>Zacznij Prace <FontAwesomeIcon style={{marginLeft: '1rem'}} icon={faCheck}/></button>)
