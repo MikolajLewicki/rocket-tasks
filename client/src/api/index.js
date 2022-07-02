@@ -24,3 +24,4 @@ export const getUser = (data) => API.post('/users/getUser', data)
 
 ///tasks
 export const getTasks = () => API.get('/tasks/getTasks')
+export const changeStatus = (data) => API.post('/tasks/changeStatus', data)

@@ -39,7 +39,7 @@ const Content = ({setIsModalOpen}) => {
                  <span style={{cursor: currentPage < Math.ceil(content.length / 10)  && 'pointer', color: currentPage < Math.ceil(content.length / 10)  ? '#b0aadb' : '#C1BDDB' }} onClick={() => {currentPage < Math.ceil(content.length / 10)  && handleSwitchPage('right')}}> <FontAwesomeIcon icon={faAngleRight} /></span>
                 </div>
             </div>
-            {content.map((item, i) => {if(i > currentPage * 10 - 11 && i < currentPage * 10){return(<ListItem tasks={location.includes("/tasks") && true} name={location.includes("/users") ? item.name : item.title} id={item._id} setIsModalOpen={setIsModalOpen}/>)}})}</div> : 
+            {content.map((item, i) => {if(i > currentPage * 10 - 11 && i < currentPage * 10){return(<ListItem tasks={location.includes("/tasks") && true} name={location.includes("/users") ? item.name : item.title} id={item._id} assignedFor={item.assignedFor} status={item?.status} setIsModalOpen={setIsModalOpen}/>)}})}</div> : 
             <div className={styles.loadingWrapper}>
             <div class={styles.loadingContainer}>
                 <span class={styles.circle}></span>

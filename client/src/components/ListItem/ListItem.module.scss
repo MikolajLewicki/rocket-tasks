@@ -32,5 +32,27 @@
                 background-color: #f1e042;
             }
         }
+        .button2{
+            @extend .button;
+            background-color: #C1BDDB;
+            cursor: auto;
+            &:hover{
+                background-color: #C1BDDB;
+            }
+        }
+        .button3{
+            @extend .button;
+            background-color: #7ed482;
+            &:hover{
+                background-color: #6bd471;
+            }
+        }
+        .button4{
+            @extend .button;
+            background-color: #d47e7e;
+            &:hover{
+                background-color: #cc6969;
+            }
+        }
     }
 }

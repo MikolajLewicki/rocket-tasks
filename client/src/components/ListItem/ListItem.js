@@ -1,16 +1,53 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styles from './ListItem.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPen, faCheck, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 import { motion} from 'framer-motion'
 import {Link} from 'react-router-dom'
-const ListItem = ({name, id, setIsModalOpen, tasks}) => {
+import usersStore from "../../zustand/usersStore";
+import contentStore from "../../zustand/contentStore";
+const ListItem = ({name, id, assignedFor, setIsModalOpen, tasks, status}) => {
+    const user = usersStore((state) => state.user)
+    const content = contentStore((state) => state.content)
+    const changeStatus = contentStore((state) => state.changeStatus)
+    const [secondButton, setSecondButton] = useState()
+    useEffect(() => {
+        if(assignedFor === user._id.toString()){
+            console.log(status)
+            switch (status){
+                case 'new':
+                    setSecondButton(<button className={styles.button3} onClick={() => {changeStatus('work', id)}}>Zacznij Prace <FontAwesomeIcon style={{marginLeft: '1rem'}} icon={faCheck}/></button>)
+                    break;
+                case 'work':
+                    setSecondButton(<button className={styles.button4} onClick={() => {changeStatus('end', id)}}>Zakończ Prace <FontAwesomeIcon style={{marginLeft: '1rem'}} icon={faCheck}/></button>)
+                    break;
+                case 'end':
+                    setSecondButton(<button className={styles.button2} >Praca zakończona</button>)
+                    break;
+            }
+            
+        }else{
+            switch (status){
+                case 'new': 
+                    setSecondButton(<button className={styles.button2} >Nowe Zadanie</button>)
+                    break;
+                case 'work':
+                    setSecondButton(<button className={styles.button2} >W trakcie pracy</button>)
+                    break;
+                case 'end':
+                    setSecondButton(<button className={styles.button2} >Praca zakończona</button>)
+                    break;   
+                     
+            }
+            
+        }
+    }, [content, ])
 
     return(
         <motion.div initial={{y: 20, opacity: 0}} animate={{y: 0, opacity: 1}} className={styles.wrapper}>
             <div className={styles.title}>{name}</div>
             <div className={styles.buttons}>
-                {tasks ? <><button className={styles.button} onClick={() => {setIsModalOpen(true); }}>Zacznij Prace <FontAwesomeIcon style={{marginLeft: '1rem'}} icon={faCheck}/></button>
+                {tasks ? <>{secondButton}
                 <Link to={`/tasks/${id}`}><button className={styles.button} onClick={() => {setIsModalOpen(true); }}>Sprawdź <FontAwesomeIcon style={{marginLeft: '1rem'}} icon={faMagnifyingGlass}/></button></Link></>
                 :<Link to={`/users/${id}`}><button className={styles.button} onClick={() => {setIsModalOpen(true); }}>Edytuj <FontAwesomeIcon style={{marginLeft: '1rem'}} icon={faUserPen}/></button></Link>}
             </div>

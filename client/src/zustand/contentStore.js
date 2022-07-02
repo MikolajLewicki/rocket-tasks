@@ -28,6 +28,16 @@ const store = (set) => ({
             console.log(err)
         }
     },
+    changeStatus: async (value, id) => {
+        const data = [value, id]
+        try{
+            await api.changeStatus(data)
+            const result = await api.getTasks();
+            set((state) => ({content: result.data.result}))
+        }catch(err){
+            console.log(err)
+        }
+    }
 })
 
 const contentStore = create(devtools(store))

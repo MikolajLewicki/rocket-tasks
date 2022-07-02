@@ -13,9 +13,8 @@ export const addTask = async (req, res) => {
             if(allTasks.length !== 0){ /// Checking is there any tasks
                 if(!allTasks.find(item => item.link === link)){ ///Checking is there already that task
                     const pos = allUsers.map((i) => i._id.toString()).indexOf(allTasks.reverse()[0].assignedFor) /// Checking index of user assigned to last task
-
                     let index = pos
-                    if(index + 1 > allUsers.length){   
+                    if(index + 1 === allUsers.length){   
                         index = 0
                     }else{
                         ++index
@@ -35,6 +34,14 @@ export const getTasks = async (req, res) => {
     try{
         const result = await Task.find()
         res.status(200).json({result: result})
+    }catch(err){
+        console.log(err)
+    }
+}
+export const changeStatus = async (req, res) => {
+    try{
+        await Task.findByIdAndUpdate(req.body[1], {status: req.body[0]})
+        res.status(200).json({message: "status changed succesfully"})
     }catch(err){
         console.log(err)
     }
