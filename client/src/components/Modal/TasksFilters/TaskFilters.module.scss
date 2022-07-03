@@ -23,12 +23,19 @@
             margin-top: 1rem;
             font-size: 1.4rem;
             display: flex;
-            flex-direction: row;
-            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
             .spanTitle{
                 font-weight: bold;
                 color: #C1BDDB;
                 margin-right: 1rem;
+            }
+            .calendar{
+                outline: none;
+                border-radius: 0.4rem;
+                margin-right: 1rem;
+                border: 2px solid #C1BDDB;
+                color: #C1BDDB;
             }
         }
     }

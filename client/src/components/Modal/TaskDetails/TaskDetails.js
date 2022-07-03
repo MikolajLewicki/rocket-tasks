@@ -70,7 +70,7 @@ const TaskDetails = ({setIsModalOpen}) => {
                 </div>
             </motion.div>} </AnimatePresence>
             <div className={styles.buttons}>
-                <a href={task?.link} ><Button style={{width: "100%"}} secondary text={"Sprawdź"}/></a>
+                {!confirmationStep && <a href={task?.link} ><Button style={{width: "100%"}} secondary text={"Sprawdź"}/></a>}
                 {user.isAdmin && !confirmationStep && <Button style={{width: "100%", marginTop: '1rem'}} submit text={"Usuń Zadanie"}/>}
             </div> 
         </form>
