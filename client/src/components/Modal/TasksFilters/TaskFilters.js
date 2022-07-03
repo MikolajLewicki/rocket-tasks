@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from "react";
 import styles from './TaskFilters.module.scss'
 import usersStore from '../../../zustand/usersStore' 
-import { motion } from 'framer-motion'
+import contentStore from '../../../zustand/contentStore' 
+import { motion, AnimatePresence } from 'framer-motion'
 import Button from "../../Button/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckSquare, faSquare } from '@fortawesome/free-regular-svg-icons'
 const TaskFilters = ({handleCloseModal}) => {
     const getUsers = usersStore(state => state.getUsers)
     const users = usersStore(state => state.users)
+    const applyFilters = contentStore(state => state.applyFilters)
     const [filters, setFilters] = useState({
         assignedFor: [],
         status: [],
@@ -19,8 +21,20 @@ const TaskFilters = ({handleCloseModal}) => {
         endOfWork2: new Date().toISOString().split("T")[0],
     })
     const handleSubmit = async (e) => {
+        let newFilters = filters
         e.preventDefault()
-
+        if(newFilters.assignedFor.length === 0){
+            newFilters.assignedFor = users.map(i => i._id)
+        }
+        if(filters.status.length === 0){
+            newFilters.status = ["new", "work", "end"]
+            newFilters.startOfWork1 = newFilters.dateOfCreation1
+            newFilters.startOfWork2 = newFilters.dateOfCreation2
+            newFilters.endOfWork1 = newFilters.dateOfCreation1
+            newFilters.endOfWork2 = newFilters.dateOfCreation2
+        }
+        applyFilters(newFilters)
+        handleCloseModal()
     }
     useEffect(() => {
         getUsers()
@@ -58,14 +72,14 @@ const TaskFilters = ({handleCloseModal}) => {
                     <input type="date" className={styles.calendar} value={filters.dateOfCreation1} onChange={(e) => handleSetFilters(e.target.value, "dateOfCreation1")} min="2022-07-01" max={filters.dateOfCreation2}/>
                     <input type="date" className={styles.calendar} value={filters.dateOfCreation2} onChange={(e) => handleSetFilters(e.target.value, "dateOfCreation2")} min="2022-07-01" max={new Date().toISOString().split("T")[0]}/>
                 </div>
-                <div className={styles.contentItem}><span className={styles.spanTitle}>Data rozpoczęcia pracy:</span>
+                <AnimatePresence>{filters.status.filter(item => item === "work").length !== 0 && <motion.div initial={{y: 15, opacity: 0}} animate={{y: 0, opacity: 1}} exit={{y: 15, opacity: 0}} className={styles.contentItem}><span className={styles.spanTitle}>Data rozpoczęcia pracy:</span>
                     <input type="date" className={styles.calendar} value={filters.startOfWork1} onChange={(e) => handleSetFilters(e.target.value, "startOfWork1")} min="2022-07-01" max={filters.startOfWork2}/>
                     <input type="date" className={styles.calendar} value={filters.startOfWork2} onChange={(e) => handleSetFilters(e.target.value, "startOfWork2")} min="2022-07-01" max={new Date().toISOString().split("T")[0]}/>
-                </div>
-                <div className={styles.contentItem}><span className={styles.spanTitle}>Data zakończenia pracy:</span>
+                </motion.div>}</AnimatePresence>
+                <AnimatePresence>{filters.status.filter(item => item === "end").length !== 0 && <motion.div initial={{y: 15, opacity: 0}} animate={{y: 0, opacity: 1}} exit={{y: 15, opacity: 0}} className={styles.contentItem}><span className={styles.spanTitle}>Data zakończenia pracy:</span>
                     <input type="date" className={styles.calendar} value={filters.endOfWork1} onChange={(e) => handleSetFilters(e.target.value, "endOfWork1")} min="2022-07-01" max={filters.endOfWork2}/>
                     <input type="date" className={styles.calendar} value={filters.endOfWork2} onChange={(e) => handleSetFilters(e.target.value, "endOfWork2")} min="2022-07-01" max={new Date().toISOString().split("T")[0]}/>
-                </div>
+                </motion.div>}</AnimatePresence>
             </motion.div>
             <div className={styles.buttons}>
                 <Button style={{width: "100%"}} submit secondary text={"Zastosuj"}/>
