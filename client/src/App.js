@@ -8,6 +8,7 @@ import Menu from "./components/Menu/Menu";
 import usersStore from "./zustand/usersStore";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Background from "./components/Background/Background";
 const App = () => {
     const user = usersStore((state) => state.user)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -41,8 +42,7 @@ const App = () => {
                 {user.isAdmin && <Route path="/users/*" element={<List setIsModalOpen={setIsModalOpen}/>} />}
             </Routes> : <Routes>
                 <Route path="*" element={<Navigate to="/logIn" replace />} />
-                <Route path="/logIn" element={<List />} />
-                <Route path="/logIn" element={<List />} />
+                <Route path="/logIn" element={<Background />} />
                 </Routes>}
             <Modal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}/>
             <Menu setIsMenuOpen={setIsMenuOpen} isLogged={isLogged} isMenuOpen={isMenuOpen}/> </> : 
