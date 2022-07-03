@@ -6,6 +6,7 @@ import NewUser from "./NewUser/NewUser";
 import LogIn from "./LogIn/LogIn";
 import EditUser from "./EditUser/EditUser";
 import TaskDetails from "./TaskDetails/TaskDetails";
+import TaskFilters from "./TasksFilters/TaskFilters";
 
 const Modal = ({setIsModalOpen, isModalOpen}) => {
     const location = useLocation().pathname
@@ -34,6 +35,7 @@ const Modal = ({setIsModalOpen, isModalOpen}) => {
                 {location.includes("/users/") && <EditUser setIsModalOpen={setIsModalOpen}/>}
                 {location === "/logIn" && <LogIn setIsModalOpen={setIsModalOpen}/>}
                 {location.includes("/tasks/") && <TaskDetails setIsModalOpen={setIsModalOpen}/>}
+                {location === "/tasks" && <TaskFilters  handleCloseModal={handleCloseModal} setIsModalOpen={setIsModalOpen}/>}
             </motion.div>}
             </AnimatePresence>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './Nav.module.scss'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faPlus} from '@fortawesome/free-solid-svg-icons'
 import Button from "../Button/Button";
@@ -19,7 +19,7 @@ const Nav = ({setIsModalOpen}) => {
                 </div>
                 <div className={styles.right}>
                     <div className={styles.button} onClick={() => setIsModalOpen(true)}>
-                        {location.pathname.includes("/users") ?  <p className={styles.buttonContent}>Dodaj <FontAwesomeIcon icon={faPlus}/></p>  : <p className={styles.buttonContent}>Filtry <FontAwesomeIcon icon={faFilter}/></p>}
+                        {location.pathname.includes("/users") ?  <Link to="/users"><p className={styles.buttonContent}>Dodaj <FontAwesomeIcon icon={faPlus}/></p></Link>  : <p className={styles.buttonContent}>Filtry <FontAwesomeIcon icon={faFilter}/></p>}
                     </div>
                 </div>
             </div>
