@@ -9,6 +9,9 @@ import { useNavigate, useLocation} from "react-router";
 const TaskDetails = ({setIsModalOpen}) => {
         const user = usersStore(state => state.user)
         const deleteTask = contentStore(state => state.deleteTask)
+        const getContent = contentStore(state => state.getContent)
+        const filters = contentStore(state => state.filters)
+        const currentContent = contentStore(state => state.currentContent)
         const tasks = contentStore(state => state.content)
         const getUser = usersStore(state => state.getUser)
         const [confirmationStep, setConfirmationStep] = useState(false)
@@ -22,6 +25,7 @@ const TaskDetails = ({setIsModalOpen}) => {
             if(confirmationStep){
                 setIsModalOpen(false)
                 deleteTask(taskToDelete)
+                getContent('/tasks', currentContent, filters)
             }else{
                 setConfirmationStep(true)
             }

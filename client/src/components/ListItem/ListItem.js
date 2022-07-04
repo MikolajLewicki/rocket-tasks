@@ -10,21 +10,23 @@ const ListItem = ({name, id, assignedFor, setIsModalOpen, tasks, status}) => {
     const user = usersStore((state) => state.user)
     const content = contentStore((state) => state.content)
     const changeStatus = contentStore((state) => state.changeStatus)
+    const getContent = contentStore(state => state.getContent)
+    const filters = contentStore(state => state.filters)
+    const currentContent = contentStore(state => state.currentContent)
     const [secondButton, setSecondButton] = useState()
     useEffect(() => {
         if(assignedFor === user._id.toString()){
             switch (status){
                 case 'new':
-                    setSecondButton(<button className={styles.button3} onClick={() => {changeStatus('work', id)}}>Zacznij Prace <FontAwesomeIcon style={{marginLeft: '1rem'}} icon={faCheck}/></button>)
+                    setSecondButton(<button className={styles.button3} onClick={() => {changeStatus('work', id); getContent('/tasks', currentContent, filters) }}>Zacznij Prace <FontAwesomeIcon style={{marginLeft: '1rem'}} icon={faCheck}/></button>)
                     break;
                 case 'work':
-                    setSecondButton(<button className={styles.button4} onClick={() => {changeStatus('end', id)}}>Zakończ Prace <FontAwesomeIcon style={{marginLeft: '1rem'}} icon={faCheck}/></button>)
+                    setSecondButton(<button className={styles.button4} onClick={() => {changeStatus('end', id); getContent('/tasks', currentContent, filters) }}>Zakończ Prace <FontAwesomeIcon style={{marginLeft: '1rem'}} icon={faCheck}/></button>)
                     break;
                 case 'end':
                     setSecondButton(<button className={styles.button2} >Praca zakończona</button>)
                     break;
-            }
-            
+            }  
         }else{
             switch (status){
                 case 'new': 

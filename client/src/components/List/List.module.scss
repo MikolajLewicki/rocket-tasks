@@ -27,6 +27,15 @@
         }
     }
 }
+.noMatchingResults{
+    width: 100%;
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #C1BDDB;
+}
 .loadingWrapper{
     width: 100%;
     margin-top: 35vh;
