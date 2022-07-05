@@ -1,0 +1,26 @@
+.wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5vh;
+    .title{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 1rem;
+        color: #C1BDDB;
+        font-weight: bold;
+        font-size: 1.4rem;
+    }
+}
+.noMatchingResults{
+    width: 100%;
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #C1BDDB;
+}

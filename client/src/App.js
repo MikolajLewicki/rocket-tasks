@@ -6,6 +6,7 @@ import List from "./components/List/List";
 import Modal from "./components/Modal/Modal";
 import Menu from "./components/Menu/Menu";
 import usersStore from "./zustand/usersStore";
+import Stats from "./components/Stats/Stats";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Background from "./components/Background/Background";
@@ -38,7 +39,7 @@ const App = () => {
             {isLogged ? <Routes>
                 <Route path="*" element={<Navigate to="/tasks" replace />} />
                 <Route path="/tasks/*" element={<List setIsModalOpen={setIsModalOpen} />} />
-                <Route path="/statistics" element={<List />} />
+                <Route path="/statistics" element={<Stats />} />
                 {user.isAdmin && <Route path="/users/*" element={<List setIsModalOpen={setIsModalOpen}/>} />}
             </Routes> : <Routes>
                 <Route path="*" element={<Navigate to="/logIn" replace />} />
