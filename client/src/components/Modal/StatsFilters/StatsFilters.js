@@ -55,11 +55,11 @@ const StatsFilters = ({handleCloseModal}) => {
             <div className={styles.contentItem}><span className={styles.spanTitle}>Właściciel:</span>
                     {users.map((item) => <span onClick={() => handleSetFilters(item._id, "users")} style={{marginLeft: '0.5rem', cursor: 'pointer'}}>{item.name} <FontAwesomeIcon style={{color: '#C1BDDB'}} icon={ newFilters.users.filter(i => i === item._id).length === 0 ? faSquare : faCheckSquare} /></span>)}
             </div>
-            <div className={styles.contentItem}><span className={styles.spanTitle}>Data dodania:</span>
+            <div className={styles.contentItem}><span className={styles.spanTitle}>1 Zakres Dat:</span>
                     <input type="date" className={styles.calendar} value={newFilters.range1Start} onChange={(e) => handleSetFilters(e.target.value, "range1Start")} min="2022-07-01" max={newFilters.range1End}/>
                     <input type="date" className={styles.calendar} value={newFilters.range1End} onChange={(e) => handleSetFilters(e.target.value, "range1End")} min="2022-07-01" max={new Date().toISOString().split("T")[0]}/>
                 </div>
-                <div className={styles.contentItem}><span className={styles.spanTitle}>Data dodania:</span>
+                <div className={styles.contentItem}><span className={styles.spanTitle}>2 Zakres Dat:</span>
                     <input type="date" className={styles.calendar} value={newFilters.range2Start} onChange={(e) => handleSetFilters(e.target.value, "range2Start")} min="2022-07-01" max={newFilters.range2End}/>
                     <input type="date" className={styles.calendar} value={newFilters.range2End} onChange={(e) => handleSetFilters(e.target.value, "range2End")} min="2022-07-01" max={new Date().toISOString().split("T")[0]}/>
                 </div>
