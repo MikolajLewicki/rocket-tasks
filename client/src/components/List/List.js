@@ -3,6 +3,7 @@ import styles from "./List.module.scss"
 import ListItem from "../ListItem/ListItem";
 import { useLocation } from "react-router";
 import contentStore from "../../zustand/contentStore";
+import usersStore from "../../zustand/usersStore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons'
 import { motion} from 'framer-motion'
@@ -10,12 +11,14 @@ import { motion} from 'framer-motion'
 const Content = ({setIsModalOpen}) => {
     const location = useLocation().pathname
     const getContent = contentStore(state => state.getContent)
+    const getUsers = usersStore(state => state.getUsers)
     const filters = contentStore(state => state.filters)
     const currentContent = contentStore(state => state.currentContent)
     const content = contentStore(state => state.content)
     const [currentPage, setCurrentPage] = useState(1)
     useEffect(() => {
         getContent(location, currentContent, filters)
+        getUsers()
     }, [location])
 
     const handleSwitchPage = (side) =>{

@@ -64,7 +64,7 @@ const EditUser = ({setIsModalOpen}) => {
                 </div>
             </motion.div>} </AnimatePresence>
             <div className={styles.buttons}>
-            {!confirmationStep && <Button style={{width: "100%"}} submit text={"Usuń użytkownika"} onClick={() => handleSetToDo("deleteUser", "usunąć użytkownika?")}/>}
+            {!confirmationStep && <>{user._id.toString() !== userToEditId && <Button style={{width: "100%"}} submit text={"Usuń użytkownika"} onClick={() => handleSetToDo("deleteUser", "usunąć użytkownika?")}/>}</>}
             </div> 
         </form>
     )
