@@ -16,6 +16,7 @@ const App = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isLoaded, setisLoaded] = useState(false)
     const [entryAnimationEnded, setEntryAnimationEnded] = useState(false)
+    const [mousePosition, setMousePosition] = useState()
     const [showContent, setShowContent] = useState(false)
     /// making sure entry animation was played and everything loaded
     useEffect(() => {setTimeout(() => setEntryAnimationEnded(true), 1200)}, [])
@@ -31,9 +32,15 @@ const App = () => {
             setShowContent(true)
         }
     },[isLoaded, entryAnimationEnded])
+
+    const handleMouseMove = (e) => {
+        if(!isLogged){
+            setMousePosition(e)
+        }
+    }
     return(
         <BrowserRouter>
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} onMouseMove={handleMouseMove}>
             {showContent ? <>{isLogged && <Header setIsMenuOpen={setIsMenuOpen}/>}
             {isLogged && <Nav setIsModalOpen={setIsModalOpen} />}
             {isLogged ? <Routes>
@@ -43,7 +50,7 @@ const App = () => {
                 {user.isAdmin && <Route path="/users/*" element={<List setIsModalOpen={setIsModalOpen}/>} />}
             </Routes> : <Routes>
                 <Route path="*" element={<Navigate to="/logIn" replace />} />
-                <Route path="/logIn" element={<Background />} />
+                <Route path="/logIn" element={<Background mousePosition={mousePosition}/>} />
                 </Routes>}
             <Modal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}/>
             <Menu setIsMenuOpen={setIsMenuOpen} isLogged={isLogged} isMenuOpen={isMenuOpen}/> </> : 
