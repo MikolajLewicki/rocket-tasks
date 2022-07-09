@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import styles from './Menu.module.scss'
-import avatar from '../../assets/avatar.webp'
 import { motion, AnimatePresence} from 'framer-motion'
 import usersStore from "../../zustand/usersStore";
 import Button from "../Button/Button";

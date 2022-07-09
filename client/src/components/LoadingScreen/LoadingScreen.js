@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './LoadingScreen.module.scss'
-import logo from '../../assets/icons8-rocket-64.png'
+import logo from '../../assets/logo.svg'
 import { motion} from 'framer-motion'
 const LoadingScreen = () => {
 

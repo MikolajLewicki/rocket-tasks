@@ -3,7 +3,7 @@ import styles from './LogIn.module.scss'
 import Input from "../../Input/Input";
 import Button from "../../Button/Button";
 import { motion, AnimatePresence } from 'framer-motion'
-import Logo from '../../../assets/icons8-rocket-64.png'
+import Logo from '../../../assets/logo.svg'
 import usersStore from "../../../zustand/usersStore";
 const LogIn = ({setIsModalOpen}) => {
     const logIn = usersStore(state => state.logIn)

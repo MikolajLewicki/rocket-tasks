@@ -1,7 +1,6 @@
 import React from "react";
 import styles from './Header.module.scss'
-import logo from '../../assets/icons8-rocket-64.png'
-import avatar from '../../assets/avatar.webp'
+import logo from '../../assets/logo.svg'
 import { Link } from "react-router-dom";
 import usersStore from "../../zustand/usersStore";
 const Header = ({setIsMenuOpen}) => {
