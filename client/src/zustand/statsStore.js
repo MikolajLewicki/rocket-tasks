@@ -11,7 +11,7 @@ const store = (set) => ({
         let range2 = (await api.getTasks()).data.result;
 
 
-        //// Checking is user in filters
+        //// Check filters for users
         range1 = range1.filter(item => { 
             for(let i = 0; i < filters.users.length; i++){
                 if(item.assignedFor === filters.users[i]){
@@ -27,7 +27,7 @@ const store = (set) => ({
             }
         })
 
-        /// Checking is task fits in date filters
+        /// Check filters for dates
         const checkDate = (date1, date2, date3) => {
             const from = new Date(date1.slice(0,4), parseInt(date1.slice(6,7)) - 1, date1.slice(8,10), 0, 0).getTime()
             const to = new Date(date2.slice(0,4), parseInt(date2.slice(6,7)) - 1, date2.slice(8,10), 23, 59).getTime()
@@ -49,7 +49,7 @@ const store = (set) => ({
                 return item
             }
         }) 
-        ///Making pie chart ready objects
+        ///Make pie chart ready objects
         const makePieChart = (obj) => {
             let result = {
                 new: obj.filter(item => item.status === "new"),
@@ -60,7 +60,7 @@ const store = (set) => ({
         }
 
 
-        ///Making bar chart ready objects
+        ///Make bar chart ready objects
         const makeBarChart = (obj1, obj2, toCheck) => {
             let result = {}
             let endresult = {}

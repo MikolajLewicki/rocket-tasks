@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from "react";
 import styles from './App.module.scss'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import usersStore from "./zustand/usersStore";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import List from "./components/List/List";
 import Modal from "./components/Modal/Modal";
 import Menu from "./components/Menu/Menu";
-import usersStore from "./zustand/usersStore";
 import Stats from "./components/Stats/Stats";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Background from "./components/Background/Background";
+
 const App = () => {
     const user = usersStore((state) => state.user)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -18,7 +19,8 @@ const App = () => {
     const [entryAnimationEnded, setEntryAnimationEnded] = useState(false)
     const [mousePosition, setMousePosition] = useState()
     const [showContent, setShowContent] = useState(false)
-    /// making sure entry animation was played and everything loaded
+
+    /// making sure entry animation was played
     useEffect(() => {setTimeout(() => setEntryAnimationEnded(true), 1200)}, [])
     /// checking is user logged
     const isLogged = usersStore((state) => state.user.length !== 0)
@@ -26,13 +28,14 @@ const App = () => {
     useEffect(() => {
         isLogged ? setIsModalOpen(false) : setIsModalOpen(true); setIsMenuOpen(false)}, [isLogged])
     useEffect(() => {checkLogin(setisLoaded)}, [])
-    /// if user everything is checked and loaded show content
+    /// if everything is checked and loaded show content
     useEffect(() => {
         if(entryAnimationEnded && isLoaded){
             setShowContent(true)
         }
     },[isLoaded, entryAnimationEnded])
 
+    /// if user isnt loaded track his mouse movement to make asteroids parallax
     const handleMouseMove = (e) => {
         if(!isLogged){
             setMousePosition(e)

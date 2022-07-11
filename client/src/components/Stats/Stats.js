@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import styles from './Stats.module.scss'
-import statsStore from '../../zustand/statsStore'
 import { motion } from 'framer-motion'
+import { ScaleAndOpacity, ScaleAndOpacity2, UpAndOpacity } from '../../animations/animations'
+import statsStore from '../../zustand/statsStore'
 import Chart from 'react-apexcharts'
 const Stats = () => {
     const status = statsStore(state => state.status)
     const chartsContent = statsStore(state => state.chartsContent)
+    
     const initialState = {
       PieChart1: {
         options: {
@@ -126,59 +128,69 @@ const Stats = () => {
     }, [chartsContent])
     return(
         <>{status === "no filters" ? 
-            <motion.div initial={{opacity: 0, scale: 0.75}} animate={{opacity: 1, scale: 1, transition: {delay: 0.1}}}  className={styles.noMatchingResults}>
+            <motion.div variants={ScaleAndOpacity2} initial="initial" animate="animate"  className={styles.noMatchingResults}>
                 <h2>Porównaj swoje wyniki!</h2>
                 <p>Dostosuj filtry aby wyświetlić odpowiednie Statystyki</p>
-            </motion.div> : <> {status === "no tasks" ? 
-                <motion.div initial={{opacity: 0, scale: 0.75}} animate={{opacity: 1, scale: 1, transition: {delay: 0.3}}}  className={styles.noMatchingResults}>
+            </motion.div> : 
+            <> {status === "no tasks" ? 
+                <motion.div variants={ScaleAndOpacity} initial="initial" animate="animate"  className={styles.noMatchingResults}>
                     <h1>Ooops!</h1>
                     <h2>Brak pasujących zadań</h2>
-                    <p>Dostosuj filtry aby znaleźć inne wyniki</p></motion.div> : 
+                    <p>Dostosuj filtry aby znaleźć inne wyniki</p>
+                </motion.div> 
+                : 
                 <div className={styles.wrapper}>
                     <div className={styles.title}> Statystyki z okresu </div>
-                    <motion.div initial={{y: 20, opacity: 0}} animate={{y: 0, opacity: 1}}>
-                    <div className={styles.sectionTitle}>Podział Zadań</div>
-                    <div className={styles.chartContainer}>
-                        <div style={{width: '50%'}}>
-                        <Chart options={chartsData.PieChart1.options} series={chartsData.PieChart1.series} type="pie" width="100%" height={320} />
-                        </div>
-                        <div style={{width: '50%'}}>
-                        <Chart options={chartsData.PieChart2.options} series={chartsData.PieChart2.series} type="pie" width="100%" height={320} />
-                        </div>
-                    </div>
-                    <div className={styles.sectionTitle}>Przydzielane zadania</div>
-                    <div className={styles.chartContainer}>
-                        <div style={{width: '75%'}}>
-                        <Chart options={chartsData.BarChart1.options} series={chartsData.BarChart1.series} type="line" width="100%" height={320} />
-                        </div>
-                        <div className={styles.descriptionContainer}>
-                            <div className={styles.value}>{descriptionData.BarChart1.difference}%</div>
-                            <div className={styles.description}>Ilość przydzielonych zadańn: {descriptionData.BarChart1.range1Length} ({descriptionData.BarChart1.range2Length})</div>
-                        </div>
-                    </div>
-                    <div className={styles.sectionTitle}>Rozpoczęcie pracy nad zadaniami</div>
-                    <div className={styles.chartContainer}>
-                        <div className={styles.descriptionContainer}>
-                            <div className={styles.value}>{descriptionData.BarChart2.difference}%</div>
-                            <div className={styles.description}>Średni czas rozpoczęcia pracy: {descriptionData.BarChart2.range1Ang}h ({descriptionData.BarChart2.range2Avg}h) </div>
-                        </div>
-                        <div style={{width: '75%'}}>
-                        <Chart options={chartsData.BarChart2.options} series={chartsData.BarChart2.series} type="line" width="100%" height={320} />
-                        </div>
-                    </div>
-                    <div className={styles.sectionTitle}>Zakończenie pracy nad zadaniami</div>
-                    <div className={styles.chartContainer}>
-                        <div style={{width: '75%'}}>
-                        <Chart options={chartsData.BarChart3.options} series={chartsData.BarChart3.series} type="line" width="100%" height={320} />
-                        </div>
-                        <div className={styles.descriptionContainer}>
-                            <div className={styles.value}>{descriptionData.BarChart3.difference}%</div>
-                            <div className={styles.description}>Średni czas pracy: {descriptionData.BarChart3.range1Ang}h ({descriptionData.BarChart3.range2Avg}h)</div>
-                        </div>
-                    </div>
+                    <motion.div variants={UpAndOpacity} initial="initial" animate="animate">
+                      <div className={styles.sectionTitle}>Podział Zadań</div>
+                      <div className={styles.chartContainer}>
+                          <div style={{width: '50%'}}>
+                            <Chart options={chartsData.PieChart1.options} series={chartsData.PieChart1.series} type="pie" width="100%" height={320} />
+                          </div>
+                          <div style={{width: '50%'}}>
+                            <Chart options={chartsData.PieChart2.options} series={chartsData.PieChart2.series} type="pie" width="100%" height={320} />
+                          </div>
+                      </div>
+                      <div className={styles.sectionTitle}>Przydzielane zadania</div>
+                      <div className={styles.chartContainer}>
+                          <div style={{width: '75%'}}>
+                            <Chart options={chartsData.BarChart1.options} series={chartsData.BarChart1.series} type="line" width="100%" height={320} />
+                          </div>
+                          <div className={styles.descriptionContainer}>
+                              <div className={styles.value}>{descriptionData.BarChart1.difference}%</div>
+                              <div className={styles.description}>
+                                Ilość przydzielonych zadańn: {descriptionData.BarChart1.range1Length} ({descriptionData.BarChart1.range2Length})
+                              </div>
+                          </div>
+                      </div>
+                      <div className={styles.sectionTitle}>Rozpoczęcie pracy nad zadaniami</div>
+                      <div className={styles.chartContainer}>
+                          <div className={styles.descriptionContainer}>
+                              <div className={styles.value}>{descriptionData.BarChart2.difference}%</div>
+                              <div className={styles.description}>
+                                Średni czas rozpoczęcia pracy: {descriptionData.BarChart2.range1Ang}h ({descriptionData.BarChart2.range2Avg}h) 
+                              </div>
+                          </div>
+                          <div style={{width: '75%'}}>
+                            <Chart options={chartsData.BarChart2.options} series={chartsData.BarChart2.series} type="line" width="100%" height={320} />
+                          </div>
+                      </div>
+                      <div className={styles.sectionTitle}>Zakończenie pracy nad zadaniami</div>
+                      <div className={styles.chartContainer}>
+                          <div style={{width: '75%'}}>
+                            <Chart options={chartsData.BarChart3.options} series={chartsData.BarChart3.series} type="line" width="100%" height={320} />
+                          </div>
+                          <div className={styles.descriptionContainer}>
+                              <div className={styles.value}>{descriptionData.BarChart3.difference}%</div>
+                              <div className={styles.description}>
+                                Średni czas pracy: {descriptionData.BarChart3.range1Ang}h ({descriptionData.BarChart3.range2Avg}h)
+                              </div>
+                          </div>
+                      </div>
                 </motion.div>
-                </div>}
-            </>}</>
+              </div>}
+            </>}
+          </>
         )
 }
 export default Stats

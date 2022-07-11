@@ -8,7 +8,7 @@ const store = (set) => ({
     filters: {},
     getContent:  async (type, currentContent, filters) => {
         try{
-            if(type.includes("/users")){
+            if(type.includes("/users")){    /// if url includes users get users and change current Content to users
                 if(currentContent === "/tasks" ){
                     set((state) => ({content: []}))
                 }  
@@ -18,21 +18,21 @@ const store = (set) => ({
             }
             if(type.includes("/tasks")){
 
-                if(currentContent === "/users" ){
+                if(currentContent === "/users" ){ /// if url includes tasks but current content is still users clear content so loading animation can be played
                     set((state) => ({content: []}))
                 }  
                 let content = await (await api.getTasks()).data.result;
-                if(Object.keys(filters).length === 0){
+                if(Object.keys(filters).length === 0){  /// check if filters are saved if so apply them
                     set((state) => ({content: content}))
                 }else{
-                    content = content.filter(item => { ///checking filters for assigned for
+                    content = content.filter(item => { ///check filters for assigned for
                         for(let i = 0; i < filters.assignedFor.length; i++){
                             if(item.assignedFor === filters.assignedFor[i]){
                                 return item
                             }
                         }
                     })
-                    content = content.filter(item => { ///checking filters for status
+                    content = content.filter(item => { ///check filters for status
                         for(let i = 0; i < filters.status.length; i++){
                             if(item.status === filters.status[i]){
                                 return item
@@ -49,7 +49,7 @@ const store = (set) => ({
                             return false
                         }
                     }
-                    content = content.filter(item => { ///checking filters for date of creation
+                    content = content.filter(item => { ///check filters for dates
                         if(checkDate(filters.dateOfCreation1, filters.dateOfCreation2, item.dateOfCreation)){
                             return item
                         }
